@@ -1,0 +1,10 @@
+FROM centos:latest
+LABEL maintainer=marko
+EXPOSE 8500
+USER root
+COPY build_files/* ./
+RUN chmod 700 *.sh
+RUN ./setup.sh
+VOLUME /local-git
+#ENTRYPOINT ["/bin/bash", "/setup.sh"]
+#CMD ["client"]
