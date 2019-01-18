@@ -1,4 +1,4 @@
-# Docker on Windows 10
+# Docker on Windows 10 for work with Hashistack and AWS
 
 This docker container is used for provisioning clusters in AWS using terraform and ansible. It uses repository `git@github.com:markokole/aws-consul-terraform.git` for provisioning HDP clusters in AWS.
 
