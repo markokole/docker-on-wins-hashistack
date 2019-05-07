@@ -16,6 +16,7 @@ RUN yum install -y \
         git \
         wget \
         unzip \
+        jq \
         net-tools
 
 # Upgrade pip
