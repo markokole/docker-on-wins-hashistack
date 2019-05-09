@@ -1,6 +1,6 @@
 # Docker on Windows 10 for work with Hashistack and AWS
 
-This docker container is used for provisioning clusters in AWS using terraform and ansible. It uses repository `git@github.com:markokole/aws-consul-terraform.git` for provisioning HDP clusters in AWS.
+This docker container is used for provisioning clusters in AWS using Terraform and Ansible. It creates a work and test environment for working with Infrastructure-as-Code.
 
 Latest version of Centos is used to create this container.
 In the container, awscli, ansible, terraform and consul are installed, consul local server is started and git2consul service is started to fetch configuration from another git repository. The latter comes in handy when automatization takes place and the parameters fed to the infrastructure-as-code scripts define the properties of the infrastructure you wish to build.
