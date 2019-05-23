@@ -57,7 +57,7 @@ COPY copy_files/git2consul-config.json /usr/lib/git2consul
 COPY copy_files/start_consul.sh ./
 
 RUN mkdir -p /home/centos/.ssh
-COPY id_rsa /home/centos/.ssh
+COPY copy_files/id_rsa /home/centos/.ssh
 RUN chmod 600 /home/centos/.ssh/id_rsa
 
 RUN chmod 700 *.sh

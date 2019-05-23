@@ -9,7 +9,7 @@ In the container, awscli, ansible, terraform and consul are installed, consul lo
 2. Open PowerShell.
 3. Step into `docker-on-wins-hashistack` folder.
 4. Create a file `aws_cred.env` and put `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` in them. Use `key=value` format. This file is used in the `docker build` line.
-5. Create a file `id_rsa` and add the private key to connect to the EC2 instances in AWS. This file is copied to the container in DockerFile.
+5. Create a file `id_rsa` in folder `copy_files` and add the private key to connect to the EC2 instances in AWS. This file is copied to the container in DockerFile.
 6. File `copy_files/encrypt_consul.json` holds a 16-bytes, Base64 encoded key for encrypting traffic between consul servers and agents.
 7. Create image by running `docker build . --tag=hashistack-image`.
 8. Create container based on the image `docker run -itd --rm -p8501:8500 --name hashistack --hostname terraformer -v C:\marko\GitHub:/local-git --env-file "env.list" --env-file "aws_cred.env" hashistack-image`.
