@@ -34,7 +34,7 @@ In the container, awscli, ansible, terraform and consul are installed, consul lo
 
 Once in the container:
 
-1. Check `localhost:8501` in your web browser to see if Consul is running.
+1. Check `localhost:8500` in your web browser to see if Consul is running.
 2. Type `terraform` to see if terraform is installed.
 3. Type `aws` to see if awscli is installed.
 4. Type `ansible` to see if ansible is installed.
