@@ -1,8 +1,10 @@
 FROM centos:latest
 LABEL maintainer marko
 
-ARG TERRAFORM_ZIP=https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip
-ARG CONSUL_ZIP=https://releases.hashicorp.com/consul/1.4.0/consul_1.4.0_linux_amd64.zip
+#ARG TERRAFORM_ZIP=https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip
+#ARG CONSUL_ZIP=https://releases.hashicorp.com/consul/1.4.0/consul_1.4.0_linux_amd64.zip
+ARG TERRAFORM_VERSION=0.12.8
+ARG CONSUL_VERSION=1.6.1
 
 EXPOSE 8500
 USER root
@@ -23,8 +25,8 @@ RUN yum install -y \
 RUN pip install --upgrade pip
 
 # download Hashistack
-RUN wget $TERRAFORM_ZIP -P /tmp
-RUN wget $CONSUL_ZIP -P /tmp
+RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -P /tmp
+RUN wget https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_amd64.zip -P /tmp
 
 # Install Hashistack
 RUN unzip /tmp/terraform*.zip -d /usr/bin/
@@ -40,20 +42,20 @@ RUN curl -sL https://rpm.nodesource.com/setup_11.x | bash -
 RUN yum install -y nodejs gcc-c++ make
 
 # Install git2consul
-RUN npm install -g git2consul
+#RUN npm install -g git2consul
 
-# Create folder for consul config
-RUN mkdir /usr/lib/consul
-
-# Create Consul log folder
+# Create folder for consul agent config
+RUN mkdir /etc/consul.d
 RUN mkdir /var/log/consul
 
 # Create folder for git2consul config json
-RUN mkdir /usr/lib/git2consul
+#RUN mkdir /usr/lib/git2consul
 
 # copy files to container
-COPY copy_files/encrypt_consul.json /usr/lib/consul
-COPY copy_files/git2consul-config.json /usr/lib/git2consul
+#COPY copy_files/encrypt_consul.json /usr/lib/consul
+#COPY copy_files/git2consul-config.json /usr/lib/git2consul
+# copy files to container
+COPY copy_files/consul-agent.hcl /etc/consul.d
 COPY copy_files/start_consul.sh ./
 
 RUN mkdir -p /home/centos/.ssh
@@ -65,4 +67,5 @@ RUN chmod 700 *.sh
 VOLUME /local-git
 
 # start services at container start
-ENTRYPOINT ["/bin/bash", "/start_consul.sh"]
+#ENTRYPOINT ["/bin/bash", "/start_consul.sh"]
+RUN /start_consul.sh

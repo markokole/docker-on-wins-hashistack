@@ -20,7 +20,7 @@ In the container, awscli, ansible, terraform and consul are installed, consul lo
 8. Create container based on the image
 
     ```bash
-    docker run -itd --rm -p8500:8500 --name hashistack --hostname terraformer -v C:\marko\GitHub:/local-git --env-file "env.list" --env-file "aws_cred.env" hashistack-image
+    docker run -itd --rm -p8500:8500 --name hashistack --hostname terraformer -v C:\marko\GitHub:/local-git --env-file "env_files/env.list" --env-file "env_files/aws_cred.env" hashistack-image
     ```
 
     Option `-v` maps the github repository on Windows drive to a folder in the container.
