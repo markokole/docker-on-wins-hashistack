@@ -48,24 +48,14 @@ RUN yum install -y nodejs gcc-c++ make
 RUN mkdir /etc/consul.d
 RUN mkdir /var/log/consul
 
-# Create folder for git2consul config json
-#RUN mkdir /usr/lib/git2consul
-
-# copy files to container
-#COPY copy_files/encrypt_consul.json /usr/lib/consul
-#COPY copy_files/git2consul-config.json /usr/lib/git2consul
 # copy files to container
 COPY copy_files/consul-agent.hcl /etc/consul.d
-COPY copy_files/start_consul.sh ./
 
 RUN mkdir -p /home/centos/.ssh
 COPY copy_files/id_rsa /home/centos/.ssh
 RUN chmod 600 /home/centos/.ssh/id_rsa
 
-RUN chmod 700 *.sh
-
 VOLUME /local-git
 
 # start services at container start
-#ENTRYPOINT ["/bin/bash", "/start_consul.sh"]
-RUN /start_consul.sh
+CMD ./usr/bin/consul agent -config-dir=/etc/consul.d/ > /var/log/consul/consul.log
